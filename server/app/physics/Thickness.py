@@ -1,11 +1,11 @@
-from physics.PhysicalProperty import PhysicalProperty
+from ..physics.PhysicalProperty import PhysicalProperty
 from sympy import symbols
 
-class PressureEdge(PhysicalProperty):
+class Thickness(PhysicalProperty):
 
     def __init__(self, input_string):
         super().__init__(input=input_string)
-        self.symbol = symbols('Pe')
+        self.symbol = symbols('h')  # Assuming 'h' is the symbol for thickness
 
     def __str__(self):
         return f'{self.value} {self.prefix} {self.unit}'

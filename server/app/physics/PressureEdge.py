@@ -1,11 +1,11 @@
-from physics.PhysicalProperty import PhysicalProperty
+from ..physics.PhysicalProperty import PhysicalProperty
 from sympy import symbols
 
-class RadiusEdge(PhysicalProperty):
+class PressureEdge(PhysicalProperty):
 
     def __init__(self, input_string):
         super().__init__(input=input_string)
-        self.symbol = symbols('re')
+        self.symbol = symbols('Pe')
 
     def __str__(self):
         return f'{self.value} {self.prefix} {self.unit}'

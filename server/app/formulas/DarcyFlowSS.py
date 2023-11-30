@@ -1,6 +1,6 @@
 from sympy import latex, symbols, Eq, solve, pi, log
-from formulas.Abstract import Function
-from physics import Permeability, FlowRate, Thickness, RadiusEdge, RadiusWell, PressureBotHole, PressureEdge, Viscosity, PhysicalProperty
+from .Abstract import Function
+from ..physics import Permeability, FlowRate, Thickness, RadiusEdge, RadiusWell, PressureBotHole, PressureEdge, Viscosity, PhysicalProperty
 
 class DarcysLawBase(Function):
 

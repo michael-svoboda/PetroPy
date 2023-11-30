@@ -1,5 +1,5 @@
-from physics import *
-from formulas import *
+from engineering.physics import *
+from engineering.formulas import *
 
 def main():
     '''print("Welcome to the Permeability CLI!")

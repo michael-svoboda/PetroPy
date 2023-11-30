@@ -1,4 +1,4 @@
-from physics.PhysicalProperty import PhysicalProperty
+from ..physics.PhysicalProperty import PhysicalProperty
 from sympy import symbols
 
 class Permeability(PhysicalProperty):

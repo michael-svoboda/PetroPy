@@ -1,11 +1,11 @@
-from physics import PhysicalProperty
+from ..physics.PhysicalProperty import PhysicalProperty
 from sympy import symbols
 
-class Thickness(PhysicalProperty):
+class RadiusWell(PhysicalProperty):
 
     def __init__(self, input_string):
         super().__init__(input=input_string)
-        self.symbol = symbols('h')  # Assuming 'h' is the symbol for thickness
+        self.symbol = symbols('rw')
 
     def __str__(self):
         return f'{self.value} {self.prefix} {self.unit}'

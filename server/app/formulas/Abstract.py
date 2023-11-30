@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 from typing import Type, Dict
 import re
 from sympy import Float, latex, solve
-from physics import *
+from ..physics import *
 
 class Function(ABC):
     def get_values(self, group: Dict[str, Type[PhysicalProperty]]) -> Dict[str, float]:
