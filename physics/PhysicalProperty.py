@@ -13,10 +13,17 @@ class PhysicalProperty(ABC):
         # Add more prefixes as needed
     }
 
-    def __init__(self, value, prefix, unit):
-        self.value = value
-        self.prefix = prefix
-        self.unit = unit 
+    def __init__(self, input):
+        if input is not None:
+            parsed_property = self.set(input)
+            self.value = parsed_property[0]
+            self.prefix = parsed_property[1]
+            self.unit = parsed_property[2]
+        else:
+            # Set all values to None if input is None
+            self.value = None
+            self.prefix = None
+            self.unit = None
 
     @abstractmethod
     def convert_units(self, new_unit):
@@ -27,15 +34,26 @@ class PhysicalProperty(ABC):
         pass
 
     @classmethod
-    def parse_string(cls, input_string):
-        # Use a regex pattern to capture three groups: numeric_value, unit_prefix, and unit_string
-        match = re.match(r'^([\d.]+)\s*([a-zA-Z]+)\|?([a-zA-Z]*)$', input_string)
-        if match:
-            numeric_value, unit_prefix, unit_string = match.groups()
+    def set(cls, input_string):
+        # Check if the input contains the '|' symbol
+        if '|' in input_string:
+            # Use the original regex pattern to capture three groups: numeric_value, prefix, and unit
+            match = re.match(r'^([\d.]+)\s*([^|]*)\|?(.*)$', input_string)
+            if match:
+                numeric_value, prefix, unit = match.groups()
 
-            numeric_value = float(numeric_value)
+                numeric_value = float(numeric_value)
 
-            return numeric_value, unit_prefix, unit_string
+                return numeric_value, prefix.strip(), unit.strip()
 
         else:
-            raise ValueError("Invalid input string format")
+            # Use a new regex pattern for the case without '|'
+            match = re.match(r'^([\d.]+)\s*(.*)$', input_string)
+            if match:
+                numeric_value, unit = match.groups()
+
+                numeric_value = float(numeric_value)
+
+                return numeric_value, '', unit.strip()
+
+        raise ValueError("Invalid input string format")
