@@ -1,0 +1,7 @@
+/* Custom CSS to make text white */
+.katex {
+    color: white;
+    font-size: 5px;
+    padding: 2%;
+  }
+  

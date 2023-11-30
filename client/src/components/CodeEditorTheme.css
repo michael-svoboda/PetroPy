@@ -1,0 +1,14 @@
+/* custom-theme.css */
+
+.ace_keyword {
+    color: #FFA07A; /* Light Salmon - Keywords */
+  }
+  
+  .ace_comment {
+    color: #808080; /* Gray - Comments */
+  }
+  
+  .ace_numeric {
+    color: #87CEFA; /* Light Sky Blue - Numeric literals */
+  }
+  

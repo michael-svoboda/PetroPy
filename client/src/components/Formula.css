@@ -1,0 +1,13 @@
+/* Custom CSS to make text white */
+.formula {
+    color: white;
+    font-size: 36px;
+    padding: 2%;
+  }
+
+.worksheet {
+    color: white;
+    font-size: 5px;
+    padding: 2%;
+  }
+  
