@@ -4,13 +4,15 @@ import 'ace-builds/src-noconflict/theme-monokai';
 import 'ace-builds/src-noconflict/mode-python';
 import './CodeEditorTheme.css';
 import EventEmitter from 'events';
+import Formula2 from'./Formula2';
 
-const CodeEditor = ({ code, onChange, eventEmitter }) => {
+const CodeEditor = ({ code, onChange, eventEmitter, onLatexStringChange }) => {
   const editorStyle = {
     // Your existing style object
   };
 
   const [editorInstance, setEditorInstance] = useState(null);
+  //const[latexString, setLatexString] = useState('test');
 
   useEffect(() => {
     const handleChange = (delta) => {
@@ -55,6 +57,8 @@ const CodeEditor = ({ code, onChange, eventEmitter }) => {
         editorInstance.session.off('change', handleChange);
         editorInstance.session.selection.off('changeSelection', handleSelectionChange);
         editorInstance.session.selection.off('changeCursor', handleCursorChange);
+        
+
       };
     }
   }, [editorInstance]);
@@ -77,7 +81,14 @@ const CodeEditor = ({ code, onChange, eventEmitter }) => {
       body: JSON.stringify({ content }),  // Pass content as JSON in the request body
     })
       .then(response => response.json())
-      .then(data => console.log('Backend response:', data))
+      .then(data =>{
+        console.log(data)
+        const latexString = data.latex_string;
+        console.log('Value: ', data.latex_string)
+        console.log('Type: ', typeof data.latex_string)
+        onLatexStringChange(latexString);
+        console.log('New string: ', latexString)
+      })
       .catch(error => console.error('Error sending content to backend:', error));
   };
   

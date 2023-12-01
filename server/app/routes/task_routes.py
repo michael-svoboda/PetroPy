@@ -32,6 +32,10 @@ def receive_content():
         print('Received data:', data)
 
         parser = AppParser(data)
+        parser.parse()
+        latx_eq = parser.parsed_solution
+
+        return jsonify({'latex_string':latx_eq}), 200
 
 
 

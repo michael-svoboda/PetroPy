@@ -3,7 +3,7 @@ import CodeEditor from '../components/CodeEditor';
 import LatexEditor from '../components/LatexEditor';
 import TopBar from '../components/TopBar';
 import Row from 'react-bootstrap/Row';
-import Formula from '../components/Formula';
+import Formula2 from '../components/Formula2';
 import Worksheet from '../components/Worksheet';
 import EventEmitter from 'events';
 
@@ -33,17 +33,27 @@ const MainPage = () => {
     setLatexText(event.target.value);
   };
 
+  const handleLatexStringChange = (latexString) => {
+    setLatexText(latexString);
+    console.log('Successfully changed LatexString in MainPage', latexString)
+  };
+
   return (
     <div className="mainPageContainer">
       <div className="leftSide">
-        {/* Pass the eventEmitter to the CodeEditor component */}
-        <CodeEditor code={inputText} onChange={(newCode) => setInputText(newCode)} eventEmitter={eventEmitter} />
+        {/* Pass onLatexStringChange to the CodeEditor component */}
+        <CodeEditor
+          code={inputText}
+          onChange={(newCode) => setInputText(newCode)}
+          eventEmitter={eventEmitter}
+          onLatexStringChange={handleLatexStringChange}
+        />
       </div>
-
       <div className="rightSide">
         <div style={{ height: '100%' }}>
           <Row style={{ height: '20%', flexGrow: 1 }}>
-            <Formula />
+            {/* Pass the latexText state to the Formula2 component */}
+            <Formula2 latexString={latexText} /><Formula2 />
           </Row>
           <Row style={{ height: '20%' }}>
             <LatexEditor code={inputText} onChange={(newCode) => setInputText(newCode)} />

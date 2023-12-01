@@ -3,11 +3,11 @@ import 'katex/dist/katex.min.css';
 import './Formula.css';
 import { BlockMath } from 'react-katex';
 
-const Formula = () => {
+const Formula = ({latexString}) => {
   const [tokens, setTokens] = useState([]);
   const [key, setKey] = useState(0);
   const [refresh, setRefresh] = useState(false);
-  const [latexString, setLatexString] = useState('');
+  const [latexEditString, setLatexEditString] = useState('');
 
   const mathStyle = {
     fontSize: '32px',
@@ -16,8 +16,8 @@ const Formula = () => {
   };
 
   const generateTokens = () => {
-    const formulaString =
-      '\\mathtt{\\mu} = \\frac{0.00708 h k \\left(Pe - Pwf\\right)}{q \\log{\\left(\\frac{re}{rw} \\right)}}';
+   
+    const formulaString = latexString;
     const cleanFormulaString = formulaString.replace(/[{}\\]/g, '');
     const tokenizedFormula = cleanFormulaString.split(' ');
 
@@ -35,9 +35,9 @@ const Formula = () => {
         setKey((prevKey) => prevKey + 1);
 
         if (tokenIndex === 0) {
-          setLatexString(tokenWithParentheses);
+          setLatexEditString(tokenWithParentheses);
         } else {
-            setLatexString((prevLatexString) => {
+            setLatexEditString((prevLatexString) => {
                 let newLatexString = prevLatexString + tokenWithParentheses;
             
                 if (tokenIndex > 7) {
@@ -59,7 +59,7 @@ const Formula = () => {
         tokenIndex++;
       } else {
         clearInterval(intervalId);
-        setLatexString(formulaString);
+        setLatexEditString(formulaString);
 
         // Clear tokens after 5 seconds
         setTimeout(() => {
@@ -72,8 +72,12 @@ const Formula = () => {
   };
 
   useEffect(() => {
-    return generateTokens();
-  }, [refresh]);
+     if (typeof latexString === undefined){
+      latexEditString = '';
+    } else {
+      setLatexEditString(latexString)
+    }
+  }, [latexString]);
 
   const handleAreaClick = () => {
     setRefresh((prevState) => !prevState);
