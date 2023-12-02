@@ -12,15 +12,6 @@ class AppParser:
         self.parsed_equation = None
         self.parsed_solution = None
 
-class AppParser:
-    def __init__(self, content):
-        print('INITIALIZED')
-        print('INPUTS: ', content['content'])
-        self.text = content['content']
-        self.variable = None
-        self.parsed_equation = None
-        self.parsed_solution = None
-
     def parse(self):
         try:
             print('START:')
@@ -36,7 +27,7 @@ class AppParser:
             # deleting all of the elemtns with only '/r'
             lines = [line for line in lines if line.strip()]
             # Remove the last character of each string in the list the '/r'
-            lines = [s[:-1] for s in lines]
+            #lines = [s[:-1] for s in lines]
             print('lines: ', lines, len(lines))
 
             ###########################################################
