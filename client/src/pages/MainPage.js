@@ -10,20 +10,11 @@ import EventEmitter from 'events';
 const MainPage = () => {
   const [latexText, setLatexText] = useState('');
   const [inputText, setInputText] = useState('');
+  const [inputTextL, setInputTextL] = useState('');
+  const [workSheetText, setWorkSheetText] = useState('');
+  const [formulaList, setFormulaList] = useState([]);
   const eventEmitter = new EventEmitter(); // Create a single instance of EventEmitter
 
-  useEffect(() => {
-    const handleEnterKeyPress = () => {
-      console.log('Enter key pressed!');
-      // Add your logic to handle 'Enter' key press
-    };
-
-    eventEmitter.on('enterKeyPressed', handleEnterKeyPress);
-
-    return () => {
-      eventEmitter.off('enterKeyPressed', handleEnterKeyPress);
-    };
-  }, [eventEmitter]);
 
   const handleInputChange = (event) => {
     setInputText(event.target.value);
@@ -36,6 +27,13 @@ const MainPage = () => {
   const handleLatexStringChange = (latexString) => {
     setLatexText(latexString);
     console.log('Successfully changed LatexString in MainPage', latexString)
+    console.log(latexText)
+  };
+
+  const workSheetTextChange = (latexString) => {
+    setFormulaList((prevList) => [...prevList, latexString]);
+    console.log('Successfully changed WorksheetText in MainPage', latexString);
+    console.log('LatexString = ', latexText)
   };
 
   return (
@@ -56,10 +54,15 @@ const MainPage = () => {
             <Formula2 latexString={latexText} /><Formula2 />
           </Row>
           <Row style={{ height: '20%' }}>
-            <LatexEditor code={inputText} onChange={(newCode) => setInputText(newCode)} />
+            <LatexEditor 
+            codeL={inputTextL}
+            onChangeL={(newCodeL) => setInputTextL(newCodeL)}
+            workSheetTextChange={workSheetTextChange}
+            latexString = {latexText}
+            />
           </Row>
           <Row style={{ height: '20%', flexGrow: 1 }}>
-            <Worksheet />
+            <Worksheet formulaList={formulaList}/>
           </Row>
         </div>
       </div>

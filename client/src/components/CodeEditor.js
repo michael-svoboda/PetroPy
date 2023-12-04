@@ -7,8 +7,17 @@ import EventEmitter from 'events';
 import Formula2 from'./Formula2';
 
 const CodeEditor = ({ code, onChange, eventEmitter, onLatexStringChange }) => {
-  const editorStyle = {
-    // Your existing style object
+   const editorStyle = {
+    width: '95%', // Adjust the width as needed
+    height: '95%', // Adjust the height as needed
+    border: '1px solid #888', // Dark grey border
+    borderRadius: '2px',
+    padding: '10px',
+    fontFamily: 'monospace',
+    fontSize: '22px', // Adjust the font size as needed
+    margin: '10px 0', // Adjust the margin as needed
+    background: 'rgba(43, 43, 43, 0.8)',
+    color: '#abb2bf', // Light text color
   };
 
   const [editorInstance, setEditorInstance] = useState(null);
@@ -18,7 +27,7 @@ const CodeEditor = ({ code, onChange, eventEmitter, onLatexStringChange }) => {
     const handleChange = (delta) => {
       if (delta.action === 'insert') {
         //console.log('Insert action detected!');
-        //console.log(editorInstance.getValue());
+        console.log(editorInstance.getValue());
         // Check if the inserted text includes the 'Enter' key press
           const insertedText = delta.lines.join('\n');
           if (insertedText.includes('\n')) {
@@ -99,13 +108,18 @@ const CodeEditor = ({ code, onChange, eventEmitter, onLatexStringChange }) => {
       <AceEditor
         mode="python"
         theme="monokai"
-        fontSize={18}
+        fontSize={20}
         width="100%"
-        height="500px"
+        height="100%"
         value={code}
         onChange={onChange}
         id="codeEditor"
         onLoad={handleLoad}
+        style={{ backgroundColor: 'rgba(25, 25, 25, 0.18)' }} // Adjust the values for your desired transparency
+        setOptions={{ // Additional options for Ace Editor
+          showGutter: false,
+          showPrintMargin: false,
+        }}
       />
     </div>
   );

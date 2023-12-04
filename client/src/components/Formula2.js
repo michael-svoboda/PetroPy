@@ -11,6 +11,12 @@ const Formula2 = ({ latexString }) => {
     color: 'white',
     // Add other styles as needed
   };
+  
+  const containerStyle = {
+    height: '400px', // Set the desired height for the scrollable box
+    overflowY: 'auto',
+    padding: '10px', // Add padding for better appearance
+  };
 
   useEffect(() => {
     // Log for debugging purposes
