@@ -48,3 +48,21 @@
 body {
   overflow: hidden;
 }
+
+button {
+  background: 'none';
+  border: 'none';
+  cursor: 'pointer';
+  color: 'white';
+}
+
+button:hover {
+  background: 'none';
+  border: '1px solid black';
+  color: 'lightgray';
+}
+
+button:active {
+  transform: scale(1);
+  color: 'white';
+}
