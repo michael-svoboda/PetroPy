@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import CodeEditor from '../components/CodeEditor';
 import LatexEditor from '../components/LatexEditor';
-import TopBar from '../components/TopBar';
+import TopBar from '../overlay_components/TopBar';
 import Row from 'react-bootstrap/Row';
 import Formula2 from '../components/Formula2';
 import Worksheet from '../components/Worksheet';
